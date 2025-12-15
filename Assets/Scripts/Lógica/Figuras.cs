@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Figuras : MonoBehaviour
 {
+    public float timer;
+    public int TiempoLimite;
+    public bool isCorrrect;
     // Esta es la clase de la Figura. Toda figura tiene estas propiedades y métodos.
     // Cuando una figura tiene que ser elegida por el jugador, se puede coger con el RaycasterGrabber
     // y se debe arrastrar hasta el mantel de venta.
@@ -15,7 +18,16 @@ public class Figuras : MonoBehaviour
 
     void Update()
     {
-        
+        timer+= Time.deltaTime;
+        if(timer>= TiempoLimite)
+        {
+            print("Respwaneando");
+            timer=0;
+        }
+        if (isCorrrect)
+        {
+            //efectitos
+        }
     }
 
     /*
