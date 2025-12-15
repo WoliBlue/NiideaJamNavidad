@@ -2,51 +2,130 @@ using UnityEngine;
 
 public class Figuras : MonoBehaviour
 {
+    [Header("Configuración")]
     public float timer;
-    public int TiempoLimite;
-    public bool isCorrrect;
-    public bool hasBeenPicked;
-    private Vector3 originalPosition;
-    // Esta es la clase de la Figura. Toda figura tiene estas propiedades y métodos.
-    // Cuando una figura tiene que ser elegida por el jugador, se puede coger con el RaycasterGrabber
-    // y se debe arrastrar hasta el mantel de venta.
-    // en el Mueble siempre salen 4 figuras pero solo se puede elegir cuando la Persona ha decidido que quiere comprar
-    // y te ha dicho cual de las figuras quiere. Solo puedes coger esa (brillará) y arrastrarla hasta el mantel de venta.
-    void Start()
+    public float TiempoLimite = 5f; // Tiempo en segundos antes de respawnear
+    public bool isCorrect;
+    
+    [Header("Respawn")]
+    public Vector3 posicionInicial;
+    public Quaternion rotacionInicial;
+    private bool fueVendida = false;
+    private bool estaSiendoAgarrada = false;
+    
+    [Header("Tipos de Figura")]
+    public TipoFigura miTipo;
+    
+    private Rigidbody rb;
+    
+    public enum TipoFigura
     {
-        hasBeenPicked = false;
-        originalPosition = gameObject.transform.position;
+        Caganer,
+        Jesus,
+        Maria,
+        Jose,
+        Melchor,
+        Gaspar,
+        Baltasar,
+        Buey,
+        Mula,
+        Aldeano
     }
 
+    void Start()
+    {
+        // Guardar posición inicial
+        posicionInicial = transform.position;
+        rotacionInicial = transform.rotation;
+        
+        rb = GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = gameObject.AddComponent<Rigidbody>();
+        }
+    }
 
     void Update()
     {
-        if (!hasBeenPicked)
+        // Volver a su posición inicial después de un tiempo si no es agarrada
+        // Solo contar tiempo si no está siendo agarrada y no fue vendida
+        if (!estaSiendoAgarrada && !fueVendida)
         {
-            timer += Time.deltaTime;
+            // Verificar si la figura está lejos de su posición inicial
+            float distancia = Vector3.Distance(transform.position, posicionInicial);
+            
+            if (distancia > 0.5f) // Si está a más de 0.5 unidades de la posición inicial
+            {
+                timer += Time.deltaTime;
+                
+                if (timer >= TiempoLimite)
+                {
+                    VolverAlMueble();
+                }
+            }
+            else
+            {
+                // Resetear el timer si está cerca de su posición
+                timer = 0;
+            }
         }
-        if (timer >= TiempoLimite)
+        
+        if (isCorrect)
         {
-            print("Respwaneando");
-            timer = 0;
-            gameObject.transform.position = originalPosition;
-            hasBeenPicked = false;
-        }
-        if (isCorrrect)
-        {
-            //efectitos
+            // FALTA POR AÑADIR QUE BRILLE CUANDO ES LA CORRECTA
         }
     }
-
-    /*
-    Tipos de figuras:
-    Caganer
-    Jesús
-    María
-    José
-    Melchor
-    Gaspar
-    Baltasar
-    Toro
-    */
+    
+    // Llamar esto cuando el RaycasterGrabber agarra la figura
+    public void SiendoAgarrada(bool agarrada)
+    {
+        estaSiendoAgarrada = agarrada;
+        if (agarrada)
+        {
+            timer = 0; // Resetear timer cuando se agarra
+        }
+    }
+    
+    // Volver al mueble después del tiempo límite
+    public void VolverAlMueble()
+    {
+        Debug.Log("Figura volviendo al mueble: " + miTipo);
+        timer = 0;
+        transform.position = posicionInicial;
+        transform.rotation = rotacionInicial;
+        
+        // Resetear física
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+    }
+    
+    // Volver al mueble instantáneamente (para la papelera)
+    public void VolverAlMuebleInstantaneo()
+    {
+        Debug.Log("Figura tirada a la papelera: " + miTipo);
+        timer = 0;
+        fueVendida = false;
+        estaSiendoAgarrada = false;
+        
+        transform.position = posicionInicial;
+        transform.rotation = rotacionInicial;
+        
+        // Resetear física
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.useGravity = true;
+        }
+    }
+    
+    // Llamar esto cuando la figura es vendida
+    public void FueVendida()
+    {
+        fueVendida = true;
+        // La figura será destruida por MantelVenta
+    }
 }

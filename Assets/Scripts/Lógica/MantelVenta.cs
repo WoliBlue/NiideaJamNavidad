@@ -3,23 +3,46 @@ using UnityEngine;
 public class MantelVenta : MonoBehaviour
 {
     public GameObject figura;
-    // El mantel de venta es a donde se debe arrastrar una figura para venderla. 
+    
+    [Header("Audio (opcional)")]
+    public AudioClip sonidoVenta;
+    private AudioSource audioSource;
+
     void Start()
     {
-        
-    }
-
-
-    void Update()
-    {
-        
-    }
-        void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.GetComponent<Figuras>())
+        // Sonido de Venta
+        if (sonidoVenta != null)
         {
-            Destroy(other.gameObject);
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
+            audioSource.playOnAwake = false;
         }
+    }
 
+    // Detectar colisiones con figuras
+    void OnTriggerEnter(Collider other)
+    {
+        Figuras figuraComponent = other.GetComponent<Figuras>();
+        
+        if (figuraComponent != null)
+        {
+            // Marcar como vendida
+            figuraComponent.FueVendida();
+            
+            // Reproducir sonido de venta si existe
+            if (sonidoVenta != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(sonidoVenta);
+            }
+            
+            // Destruir la figura
+            Destroy(other.gameObject);
+            
+            // FALTA NOTIFICAR AL GAME MANAGER Y DATA MANAGER
+            Debug.Log("Figura vendida: " + figuraComponent.miTipo);
+        }
     }
 }

@@ -1,18 +1,39 @@
 using UnityEngine;
 
-public class CuboBasura : MonoBehaviour
+public class Papelera : MonoBehaviour
 {
-    // Tiene una deteccion del objeto como el Mantel pero cuando tiras una figura al cubo de basura,
-    // la figura vuelve al FiguraStand (mueble de las figuras) y suena un mini aplauso
-    // Es comedia pura y dura.
+    [Header("Audio")]
+    public AudioClip sonidoAplauso;
+    private AudioSource audioSource;
+
     void Start()
     {
+        // Añadir AudioSource si no existe
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
         
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 1f; // Sonido 3D
     }
 
-
-    void Update()
+    void OnTriggerEnter(Collider other)
     {
+        // Verificar si es una figura
+        Figuras figura = other.GetComponent<Figuras>();
         
+        if (figura != null)
+        {
+            // Reproducir sonido de aplauso
+            if (sonidoAplauso != null)
+            {
+                audioSource.PlayOneShot(sonidoAplauso);
+            }
+            
+            // Hacer que la figura vuelva a su posición inicial instantáneamente
+            figura.VolverAlMuebleInstantaneo();
+        }
     }
 }
