@@ -4,8 +4,8 @@ public class Figuras : MonoBehaviour
 {
     [Header("Configuración")]
     public float timer;
-    public float TiempoLimite = 5f; // Tiempo en segundos antes de respawnear
-    public bool isCorrect;
+    public float TiempoLimite = 5f;
+    public bool isCorrect = false;
     
     [Header("Respawn")]
     public Vector3 posicionInicial;
@@ -15,6 +15,15 @@ public class Figuras : MonoBehaviour
     
     [Header("Tipos de Figura")]
     public TipoFigura miTipo;
+    
+    [Header("Efecto Glow Navideño")]
+    public Color colorGlowVerde = new Color(0f, 1f, 0f, 1f);
+    public Color colorGlowRojo = new Color(1f, 0f, 0f, 1f);
+    public float velocidadParpadeo = 2f;
+    private Material materialOriginal;
+    private Renderer rendererFigura;
+    private float tiempoGlow = 0f;
+    private bool tieneMaterialGlow = false;
     
     private Rigidbody rb;
     
@@ -43,18 +52,53 @@ public class Figuras : MonoBehaviour
         {
             rb = gameObject.AddComponent<Rigidbody>();
         }
+        
+        // Obtener renderer para el glow
+        rendererFigura = GetComponent<Renderer>();
+        if (rendererFigura == null)
+        {
+            rendererFigura = GetComponentInChildren<Renderer>();
+        }
+        
+        if (rendererFigura != null)
+        {
+            materialOriginal = rendererFigura.material;
+        }
     }
 
     void Update()
     {
-        // Volver a su posición inicial después de un tiempo si no es agarrada
+        // PARA TESTEO!!! R para hacer que Gaspar sea la correcta
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (miTipo == TipoFigura.Gaspar)
+            {
+                SetCorrect(true);
+                Debug.Log("¡Gaspar es ahora la figura correcta!");
+            }
+            else
+            {
+                SetCorrect(false);
+            }
+        }
+        
+        // Efecto glow navideño cuando es correcta
+        if (isCorrect && rendererFigura != null)
+        {
+            AplicarGlowNavideño();
+        }
+        else if (!isCorrect && tieneMaterialGlow)
+        {
+            // Quitar glow si ya no es correcta
+            QuitarGlow();
+        }
+        
         // Solo contar tiempo si no está siendo agarrada y no fue vendida
         if (!estaSiendoAgarrada && !fueVendida)
         {
-            // Verificar si la figura está lejos de su posición inicial
             float distancia = Vector3.Distance(transform.position, posicionInicial);
             
-            if (distancia > 0.5f) // Si está a más de 0.5 unidades de la posición inicial
+            if (distancia > 0.5f)
             {
                 timer += Time.deltaTime;
                 
@@ -65,28 +109,60 @@ public class Figuras : MonoBehaviour
             }
             else
             {
-                // Resetear el timer si está cerca de su posición
                 timer = 0;
             }
         }
-        
-        if (isCorrect)
+    }
+    
+    void AplicarGlowNavideño()
+    {
+        if (!tieneMaterialGlow)
         {
-            // FALTA POR AÑADIR QUE BRILLE CUANDO ES LA CORRECTA
+            // Crear material con emisión
+            rendererFigura.material.EnableKeyword("_EMISSION");
+            tieneMaterialGlow = true;
+        }
+        
+        // Parpadeo alternando entre verde y rojo (colores navideños)
+        tiempoGlow += Time.deltaTime * velocidadParpadeo;
+        float brillo = Mathf.PingPong(tiempoGlow, 1f);
+        
+        // Alternar entre verde y rojo cada segundo
+        Color colorActual = (Mathf.FloorToInt(tiempoGlow) % 2 == 0) ? colorGlowVerde : colorGlowRojo;
+        
+        // Aplicar emisión con intensidad variable
+        Color emissionColor = colorActual * Mathf.LinearToGammaSpace(brillo * 2f);
+        rendererFigura.material.SetColor("_EmissionColor", emissionColor);
+    }
+    
+    void QuitarGlow()
+    {
+        if (rendererFigura != null && tieneMaterialGlow)
+        {
+            rendererFigura.material.SetColor("_EmissionColor", Color.black);
+            tieneMaterialGlow = false;
+            tiempoGlow = 0f;
         }
     }
     
-    // Llamar esto cuando el RaycasterGrabber agarra la figura
+    public void SetCorrect(bool correcto)
+    {
+        isCorrect = correcto;
+        if (!correcto)
+        {
+            QuitarGlow();
+        }
+    }
+    
     public void SiendoAgarrada(bool agarrada)
     {
         estaSiendoAgarrada = agarrada;
         if (agarrada)
         {
-            timer = 0; // Resetear timer cuando se agarra
+            timer = 0;
         }
     }
     
-    // Volver al mueble después del tiempo límite
     public void VolverAlMueble()
     {
         Debug.Log("Figura volviendo al mueble: " + miTipo);
@@ -94,7 +170,6 @@ public class Figuras : MonoBehaviour
         transform.position = posicionInicial;
         transform.rotation = rotacionInicial;
         
-        // Resetear física
         if (rb != null)
         {
             rb.linearVelocity = Vector3.zero;
@@ -102,7 +177,6 @@ public class Figuras : MonoBehaviour
         }
     }
     
-    // Volver al mueble instantáneamente (para la papelera)
     public void VolverAlMuebleInstantaneo()
     {
         Debug.Log("Figura tirada a la papelera: " + miTipo);
@@ -113,7 +187,6 @@ public class Figuras : MonoBehaviour
         transform.position = posicionInicial;
         transform.rotation = rotacionInicial;
         
-        // Resetear física
         if (rb != null)
         {
             rb.linearVelocity = Vector3.zero;
@@ -122,10 +195,9 @@ public class Figuras : MonoBehaviour
         }
     }
     
-    // Llamar esto cuando la figura es vendida
     public void FueVendida()
     {
         fueVendida = true;
-        // La figura será destruida por MantelVenta
+        QuitarGlow();
     }
 }
