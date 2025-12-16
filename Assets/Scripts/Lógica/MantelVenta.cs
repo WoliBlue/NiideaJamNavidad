@@ -3,7 +3,7 @@ using UnityEngine;
 public class MantelVenta : MonoBehaviour
 {
     public GameObject figura;
-    
+
     [Header("Audio (opcional)")]
     public AudioClip sonidoVenta;
     private AudioSource audioSource;
@@ -26,23 +26,25 @@ public class MantelVenta : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Figuras figuraComponent = other.GetComponent<Figuras>();
-        
+
         if (figuraComponent != null)
         {
             // Marcar como vendida
             figuraComponent.FueVendida();
-            
+
             // Reproducir sonido de venta si existe
             if (sonidoVenta != null && audioSource != null)
             {
                 audioSource.PlayOneShot(sonidoVenta);
             }
-            
+
             // Destruir la figura
             Destroy(other.gameObject);
-            
-            // FALTA NOTIFICAR AL GAME MANAGER Y DATA MANAGER
+
+            // Notificar al GameManager y DataManager
             Debug.Log("Figura vendida: " + figuraComponent.miTipo);
+            GameManager.instance.VenderFigura();
+            DataManager.instance.IncrementarFigurasVendidas();
         }
     }
 }
