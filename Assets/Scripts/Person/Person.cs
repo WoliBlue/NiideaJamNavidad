@@ -7,12 +7,15 @@ using UnityEngine;
 // Aqui se puede definir cosas como su nombre, que figura quiere, etc.
 // Cuando la persona llega al puesto, cuando clickeas, se activa esta clase para que empiece la interacción.
 
+// TODO: Añadir lógica de figura
+
 public class Person : MonoBehaviour {
   #region Variables
   [Header("Person Info")]
   [SerializeField] private string _name = "";
   [SerializeField] private PersonPersonality _personality;
-  [SerializeField] private Figuras _figureWants;
+  // [SerializeField] private Figure _figureWants;
+  [SerializeField] private string _figureWants; //* Temporal para pruebas
   [SerializeField] private Action<Person> _onFinishedBuying;
   private IPersonState _state;
   #endregion
@@ -40,7 +43,8 @@ public class Person : MonoBehaviour {
   #region Getters
   public PersonPersonality Personality => _personality;
   public string Name => _name;
-  public Figuras FigureWants => _figureWants;
+  // public Figure FigureWants => _figureWants;
+  public string FigureWants => _figureWants;
   public IPersonState State => _state;
   public Action<Person> OnFinishedBuying => _onFinishedBuying;
   #endregion

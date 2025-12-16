@@ -11,17 +11,41 @@ using UnityEngine;
 public class PersonPersonality : MonoBehaviour {
   #region Variables
   [Header("Personality Info")]
-  [SerializeField] private int _humourBalance;
-  // [SerializeField] private Dialog _dialog;
-  // public Dialog Dialog => _dialog;
+  [SerializeField] private PersonPersonalityData _data;
+  private int _humourBalance;
+  #endregion
+
+  #region Events
+  private void Awake() {
+    InitData();
+  }
   #endregion
 
   #region Public Methods
   public void Add(int value) {
     _humourBalance += value;
   }
+  public bool CheckHumourToBuy() {
+    return _humourBalance > 0;
+  }
   #region Getters
   public int HumourBalance => _humourBalance;
+  public PersonPersonalityData Data => _data;
   #endregion
+  #endregion
+
+  #region Private Methods
+  /// <summary>
+  /// Method to load the associated data and not to change it to others 
+  /// that have the same data
+  /// </summary>
+  private void InitData() {
+    if (!_data) {
+      Debug.LogWarning("PersonPersonalityData no asociada!");
+      return;
+    }
+
+    _humourBalance = _data.InitialHumourBalance;
+  }
   #endregion
 }
