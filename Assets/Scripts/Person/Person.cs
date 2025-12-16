@@ -12,7 +12,7 @@ public class Person : MonoBehaviour {
   [Header("Person Info")]
   [SerializeField] private string _name = "";
   [SerializeField] private PersonPersonality _personality;
-  [SerializeField] private Figure _figureWants;
+  [SerializeField] private Figuras _figureWants;
   [SerializeField] private Action<Person> _onFinishedBuying;
   private IPersonState _state;
   #endregion
@@ -40,7 +40,7 @@ public class Person : MonoBehaviour {
   #region Getters
   public PersonPersonality Personality => _personality;
   public string Name => _name;
-  public Figure FigureWants => _figureWants;
+  public Figuras FigureWants => _figureWants;
   public IPersonState State => _state;
   public Action<Person> OnFinishedBuying => _onFinishedBuying;
   #endregion
