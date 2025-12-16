@@ -35,6 +35,7 @@ public class MantelVenta : MonoBehaviour
                 
                 // Marcar como vendida
                 figuraComponent.FueVendida();
+                GameManager.instance.VenderFigura();
                 
                 // Reproducir sonido de venta
                 if (sonidoVenta != null)

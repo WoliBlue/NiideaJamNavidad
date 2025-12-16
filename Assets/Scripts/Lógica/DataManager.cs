@@ -14,6 +14,11 @@ public class DataManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            GameManager.instance.willBuy=true;
+        }
+        
         if (diaActual == diasTotales)
         {
             print("Dia final");

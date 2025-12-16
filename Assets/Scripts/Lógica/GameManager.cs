@@ -3,7 +3,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public DataManager dataManager;
     public GameObject[] figuras;
 
     public GameObject[] personas;
@@ -14,6 +13,11 @@ public class GameManager : MonoBehaviour
     public int activePersonIndex = 0;
     public bool hasActiveFigures = false;
     public GameObject activeFigure;
+    public bool willBuy = false;
+
+    public int tiempoParaSalir =4;
+
+    public Transform puntoDeSalida;
 
     // Toda la lógica del juego se controla desde aquí. Pilla que dia es del DataManager para saber que personas llamar
     // y que figuras poner en el mueble. 
@@ -31,22 +35,29 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         instance = this;
-        dataManager = DataManager.instance;
         figuras = GameObject.FindGameObjectsWithTag("objeto");
+        InitDay();
 
     }
 
 
     void Update()
     {
-        TerminarDia();
-
+        DiaLogic();
+        if (Input.GetKey(KeyCode.T))
+        {
+            SeFue();
+        }
     }
-    void TerminarDia()
+    void DiaLogic()
     {
-        if (!hasActiveFigures || activeFigure==null)
+        if (!hasActiveFigures && willBuy || activeFigure==null)
         {
             activeFigure = figuras[Random.Range(0, figuras.Length)];
+            if (figuras.Length == 0)
+            {
+                print("Ganastes");
+            }
             activeFigure.GetComponent<Figuras>().isCorrect = true;
             hasActiveFigures = true;
         }
@@ -54,13 +65,33 @@ public class GameManager : MonoBehaviour
         {
             clientesTotalesDelDia = 0;
             //triggerea el efecto del siguiente dia
-            dataManager.diaActual++;
+            DataManager.instance.diaActual++;
         }
     }
     public void VenderFigura()
     {
         hasActiveFigures = false;
         activeFigure = null;
-        dataManager.IncrementarFigurasVendidas();
+        willBuy=false;
+        DataManager.instance.IncrementarFigurasVendidas();
+
+    }
+
+    public void ChangeClient()
+    {
+        
+    }
+    public void InitDay()
+    {
+        personas=GameObject.FindGameObjectsWithTag("persona");
+    }
+    public void AcercarsealMostrador()
+    {
+        
+    }
+    public void SeFue()
+    {
+        float step = 5 * Time.deltaTime;
+        personas[activePersonIndex].transform.position = Vector3.MoveTowards(personas[activePersonIndex].transform.position, puntoDeSalida.position, step);
     }
 }

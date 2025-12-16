@@ -68,22 +68,9 @@ public class Figuras : MonoBehaviour
 
     void Update()
     {
-        // PARA TESTEO!!! R para hacer que Gaspar sea la correcta
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (miTipo == TipoFigura.Gaspar)
-            {
-                SetCorrect(true);
-                Debug.Log("¡Gaspar es ahora la figura correcta!");
-            }
-            else
-            {
-                SetCorrect(false);
-            }
-        }
-        
+
         // Efecto glow navideño cuando es correcta
-        if (isCorrect && rendererFigura != null)
+        if (isCorrect && GameManager.instance.willBuy && rendererFigura != null)
         {
             AplicarGlowNavideño();
         }
