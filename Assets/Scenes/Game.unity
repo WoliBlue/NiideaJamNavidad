@@ -276,25 +276,43 @@ MonoBehaviour:
   willBuy: 0
   tiempoParaSalir: 4
   puntoDeSalida: {fileID: 0}
-  fadeScreenDuration: 3
-  fadeBlack: {fileID: 0}
+  fadeScreenDuration: 7
+  fadeBlack: {fileID: 288821796}
   curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -1.0132043
-      outSlope: -1.0132043
+      time: 0.018276215
+      value: 0.0001411438
+      inSlope: 2.060846
+      outSlope: 2.060846
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
+      time: 0.502608
+      value: 0.99827445
+      inSlope: 2.060846
+      outSlope: 0.036025435
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.17209366
+    - serializedVersion: 3
+      time: 0.890573
+      value: 1.0036669
+      inSlope: 0.04515333
+      outSlope: 0.4324681
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.17051953
+      outWeight: 0.8103844
+    - serializedVersion: 3
       time: 0.99871826
       value: -0.01190567
-      inSlope: -1.0132043
-      outSlope: -1.0132043
+      inSlope: -9.3908205
+      outSlope: -9.3908205
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -779,7 +797,7 @@ GameObject:
   m_Component:
   - component: {fileID: 288821793}
   - component: {fileID: 288821795}
-  - component: {fileID: 288821794}
+  - component: {fileID: 288821796}
   m_Layer: 5
   m_Name: FadeBlack
   m_TagString: Untagged
@@ -806,7 +824,15 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &288821794
+--- !u!222 &288821795
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288821792}
+  m_CullTransparentMesh: 1
+--- !u!114 &288821796
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -815,7 +841,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 288821792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -826,21 +852,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
---- !u!222 &288821795
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288821792}
-  m_CullTransparentMesh: 1
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0

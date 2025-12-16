@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     private float timer;
 
     public Transform puntoDeSalida;
+    
 
 //FADESCREEN
  public float fadeScreenDuration;
