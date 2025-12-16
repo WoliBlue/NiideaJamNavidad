@@ -2,51 +2,189 @@ using UnityEngine;
 
 public class Figuras : MonoBehaviour
 {
+    [Header("Configuración")]
     public float timer;
-    public int TiempoLimite;
-    public bool isCorrrect;
-    public bool hasBeenPicked;
-    private Vector3 originalPosition;
-    // Esta es la clase de la Figura. Toda figura tiene estas propiedades y métodos.
-    // Cuando una figura tiene que ser elegida por el jugador, se puede coger con el RaycasterGrabber
-    // y se debe arrastrar hasta el mantel de venta.
-    // en el Mueble siempre salen 4 figuras pero solo se puede elegir cuando la Persona ha decidido que quiere comprar
-    // y te ha dicho cual de las figuras quiere. Solo puedes coger esa (brillará) y arrastrarla hasta el mantel de venta.
-    void Start()
+    public float TiempoLimite = 5f;
+    public bool isCorrect = false;
+    
+    [Header("Respawn")]
+    public Vector3 posicionInicial;
+    public Quaternion rotacionInicial;
+    private bool fueVendida = false;
+    private bool estaSiendoAgarrada = false;
+    
+    [Header("Tipos de Figura")]
+    public TipoFigura miTipo;
+    
+    [Header("Efecto Glow Navideño")]
+    public Color colorGlowVerde = new Color(0f, 1f, 0f, 1f);
+    public Color colorGlowRojo = new Color(1f, 0f, 0f, 1f);
+    public float velocidadParpadeo = 2f;
+    private Material materialOriginal;
+    private Renderer rendererFigura;
+    private float tiempoGlow = 0f;
+    private bool tieneMaterialGlow = false;
+    
+    private Rigidbody rb;
+    
+    public enum TipoFigura
     {
-        hasBeenPicked = false;
-        originalPosition = gameObject.transform.position;
+        Caganer,
+        Jesus,
+        Maria,
+        Jose,
+        Melchor,
+        Gaspar,
+        Baltasar,
+        Buey,
+        Mula,
+        Aldeano
     }
 
+    void Start()
+    {
+        // Guardar posición inicial
+        posicionInicial = transform.position;
+        rotacionInicial = transform.rotation;
+        
+        rb = GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = gameObject.AddComponent<Rigidbody>();
+        }
+        
+        // Obtener renderer para el glow
+        rendererFigura = GetComponent<Renderer>();
+        if (rendererFigura == null)
+        {
+            rendererFigura = GetComponentInChildren<Renderer>();
+        }
+        
+        if (rendererFigura != null)
+        {
+            materialOriginal = rendererFigura.material;
+        }
+    }
 
     void Update()
     {
-        if (!hasBeenPicked)
+
+        // Efecto glow navideño cuando es correcta
+        if (isCorrect && GameManager.instance.willBuy && rendererFigura != null)
         {
-            timer += Time.deltaTime;
+            AplicarGlowNavideño();
         }
-        if (timer >= TiempoLimite)
+        else if (!isCorrect && tieneMaterialGlow)
         {
-            print("Respwaneando");
-            timer = 0;
-            gameObject.transform.position = originalPosition;
-            hasBeenPicked = false;
+            // Quitar glow si ya no es correcta
+            QuitarGlow();
         }
-        if (isCorrrect)
+        
+        // Solo contar tiempo si no está siendo agarrada y no fue vendida
+        if (!estaSiendoAgarrada && !fueVendida)
         {
-            //efectitos
+            float distancia = Vector3.Distance(transform.position, posicionInicial);
+            
+            if (distancia > 0.5f)
+            {
+                timer += Time.deltaTime;
+                
+                if (timer >= TiempoLimite)
+                {
+                    VolverAlMueble();
+                }
+            }
+            else
+            {
+                timer = 0;
+            }
         }
     }
-
-    /*
-    Tipos de figuras:
-    Caganer
-    Jesús
-    María
-    José
-    Melchor
-    Gaspar
-    Baltasar
-    Toro
-    */
+    
+    void AplicarGlowNavideño()
+    {
+        if (!tieneMaterialGlow)
+        {
+            // Crear material con emisión
+            rendererFigura.material.EnableKeyword("_EMISSION");
+            tieneMaterialGlow = true;
+        }
+        
+        // Parpadeo alternando entre verde y rojo (colores navideños)
+        tiempoGlow += Time.deltaTime * velocidadParpadeo;
+        float brillo = Mathf.PingPong(tiempoGlow, 1f);
+        
+        // Alternar entre verde y rojo cada segundo
+        Color colorActual = (Mathf.FloorToInt(tiempoGlow) % 2 == 0) ? colorGlowVerde : colorGlowRojo;
+        
+        // Aplicar emisión con intensidad variable
+        Color emissionColor = colorActual * Mathf.LinearToGammaSpace(brillo * 2f);
+        rendererFigura.material.SetColor("_EmissionColor", emissionColor);
+    }
+    
+    void QuitarGlow()
+    {
+        if (rendererFigura != null && tieneMaterialGlow)
+        {
+            rendererFigura.material.SetColor("_EmissionColor", Color.black);
+            tieneMaterialGlow = false;
+            tiempoGlow = 0f;
+        }
+    }
+    
+    public void SetCorrect(bool correcto)
+    {
+        isCorrect = correcto;
+        if (!correcto)
+        {
+            QuitarGlow();
+        }
+    }
+    
+    public void SiendoAgarrada(bool agarrada)
+    {
+        estaSiendoAgarrada = agarrada;
+        if (agarrada)
+        {
+            timer = 0;
+        }
+    }
+    
+    public void VolverAlMueble()
+    {
+        Debug.Log("Figura volviendo al mueble: " + miTipo);
+        timer = 0;
+        transform.position = posicionInicial;
+        transform.rotation = rotacionInicial;
+        
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+    }
+    
+    public void VolverAlMuebleInstantaneo()
+    {
+        Debug.Log("Figura tirada a la papelera: " + miTipo);
+        timer = 0;
+        fueVendida = false;
+        estaSiendoAgarrada = false;
+        
+        transform.position = posicionInicial;
+        transform.rotation = rotacionInicial;
+        
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.useGravity = true;
+        }
+    }
+    
+    public void FueVendida()
+    {
+        fueVendida = true;
+        QuitarGlow();
+    }
 }
