@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Threading;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
     public bool willBuy = false;
 
     public int tiempoParaSalir =4;
+    private float timer;
 
     public Transform puntoDeSalida;
 
@@ -91,7 +94,13 @@ public class GameManager : MonoBehaviour
     }
     public void SeFue()
     {
+        timer+=Time.deltaTime;
         float step = 5 * Time.deltaTime;
         personas[activePersonIndex].transform.position = Vector3.MoveTowards(personas[activePersonIndex].transform.position, puntoDeSalida.position, step);
+    }
+    public IEnumerator SequenciaDeSalida()
+    {
+        yield return new WaitForSeconds(tiempoParaSalir);
+
     }
 }
