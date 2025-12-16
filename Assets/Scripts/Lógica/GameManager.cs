@@ -40,10 +40,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         TerminarDia();
+
     }
     void TerminarDia()
     {
-        if (!hasActiveFigures)
+        if (!hasActiveFigures || activeFigure==null)
         {
             activeFigure = figuras[Random.Range(0, figuras.Length)];
             activeFigure.GetComponent<Figuras>().isCorrect = true;
