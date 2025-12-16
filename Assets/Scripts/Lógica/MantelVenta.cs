@@ -45,6 +45,8 @@ public class MantelVenta : MonoBehaviour
                 
                 // Destruir la figura
                 Destroy(other.gameObject);
+                if(GameManager.instance.figuras.Contains(other.gameObject))
+                GameManager.instance.figuras.Remove(other.gameObject);
                 
                 // TODO: Notificar al GameManager/DataManager
                 // GameManager.instance.RegistrarVenta(figuraComponent.miTipo);

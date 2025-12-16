@@ -163,7 +163,7 @@ public class Figuras : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
         }
     }
-    
+
     public void VolverAlMuebleInstantaneo()
     {
         Debug.Log("Figura tirada a la papelera: " + miTipo);
