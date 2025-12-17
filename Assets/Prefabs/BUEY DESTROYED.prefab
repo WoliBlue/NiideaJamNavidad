@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ae792d89d6f6b343afc822d16d8c8c9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.9784851
+      value: 67.30543
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ae792d89d6f6b343afc822d16d8c8c9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.2550001
+      value: 0.0013842285
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ae792d89d6f6b343afc822d16d8c8c9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.4330769
+      value: 42.493687
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ae792d89d6f6b343afc822d16d8c8c9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -70,7 +70,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ae792d89d6f6b343afc822d16d8c8c9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6483458769511761167}
+      addedObject: {fileID: 1069883189893795513}
     - targetCorrespondingSourceObject: {fileID: -5538985522780130180, guid: 4ae792d89d6f6b343afc822d16d8c8c9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 474562435216081159}
@@ -155,7 +155,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ae792d89d6f6b343afc822d16d8c8c9, type: 3}
   m_PrefabInstance: {fileID: 2749934592061814932}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6483458769511761167
+--- !u!114 &1069883189893795513
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3091953282733180357}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4880f2228250e5843828f90194590c68, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b2b082d50874564aac81f4b73e2a2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3641738036829562111 stripped

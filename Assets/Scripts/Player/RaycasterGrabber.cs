@@ -6,7 +6,7 @@ public class RaycasterGrabber : MonoBehaviour
     public Transform viewpoint;
     public int grabDistance = 3;
     private Camera camera;
-
+    public DialogueBoxController dialogue;
     public bool hasObject;
     public GameObject grabbedObject;
 
@@ -14,7 +14,28 @@ public class RaycasterGrabber : MonoBehaviour
     {
         camera = Camera.main;
     }
+[SerializeField] float talkDistance = 2;
+    bool inConversation;
 
+
+
+    void Interact()
+    {
+        if (inConversation)
+        {
+            DialogueBoxController.instance.SkipLine();
+        }
+        else
+        {
+            if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitInfo, talkDistance))
+            {
+                //if (hitInfo.collider.gameObject.TryGetComponent(out NPC npc))
+                //{
+                  //  DialogueBoxController.instance.StartDialogue(npc.dialogueAsset.dialogue, npc.StartPosition, npc.npcName);
+                //}
+            }
+        }
+    }
     public void GrabObject()
     {
         if (grabbedObject)
@@ -43,6 +64,10 @@ public class RaycasterGrabber : MonoBehaviour
     }
     void Update()
     {
+                if (Input.GetKeyDown(KeyCode.E))
+        {
+            Interact();
+        }
         RaycastHit raycast;
 
         // Si ya tenemos un objeto y hacemos click, lo soltamos

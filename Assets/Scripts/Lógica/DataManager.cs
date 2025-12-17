@@ -26,6 +26,7 @@ public class DataManager : MonoBehaviour
         if (diaActual == diasTotales)
         {
             print("Dia final");
+
         }
     }
     public void IncrementarFigurasVendidas()
