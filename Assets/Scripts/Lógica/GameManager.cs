@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
  public float fadeScreenDuration;
  public Image fadeBlack;
  public AnimationCurve curve;
+  public AnimationCurve GameOverCurve;
+  public bool triggeringGameover;
 
 public bool TriggerNewDay;
 
@@ -58,6 +60,18 @@ public bool TriggerNewDay;
 
     void Update()
     {
+        if (triggeringGameover && TriggerNewDay)
+        {
+            fadeTimer+=Time.deltaTime;
+            Color color = GameOverCurve.Evaluate(fadeTimer/fadeScreenDuration)*Color.black;
+            fadeBlack.color = color;
+            if (fadeTimer >= fadeScreenDuration)
+            {
+                TriggerNewDay=false;
+                fadeTimer=0;
+                return;
+            }
+        }
         if (TriggerNewDay)
         {
             fadeTimer+=Time.deltaTime;
@@ -72,7 +86,8 @@ public bool TriggerNewDay;
         DiaLogic();
         if (Input.GetKey(KeyCode.T))
         {
-            SeFue();
+            TriggerNewDay=true;
+            triggeringGameover=true;
         }
         if (Input.GetKey(KeyCode.F))
         {

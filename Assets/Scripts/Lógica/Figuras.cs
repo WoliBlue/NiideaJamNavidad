@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Figuras : MonoBehaviour
@@ -6,6 +9,7 @@ public class Figuras : MonoBehaviour
     public float timer;
     public float TiempoLimite = 5f;
     public bool isCorrect = false;
+    public List<GameObject> partes =  new List<GameObject>();
     
     [Header("Respawn")]
     public Vector3 posicionInicial;
@@ -24,6 +28,9 @@ public class Figuras : MonoBehaviour
     private Renderer rendererFigura;
     private float tiempoGlow = 0f;
     private bool tieneMaterialGlow = false;
+    public GameObject destroyPrefab;
+
+    public GameObject render;
     
     private Rigidbody rb;
     
@@ -43,6 +50,7 @@ public class Figuras : MonoBehaviour
 
     void Start()
     {
+
         // Guardar posición inicial
         posicionInicial = transform.position;
         rotacionInicial = transform.rotation;
@@ -51,6 +59,7 @@ public class Figuras : MonoBehaviour
         if (rb == null)
         {
             rb = gameObject.AddComponent<Rigidbody>();
+            
         }
         
         // Obtener renderer para el glow
@@ -162,6 +171,29 @@ public class Figuras : MonoBehaviour
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+
+        if (rb.linearVelocity.y > 0.01 && rb.linearVelocity.x > 0.01)
+        {
+            print("ouch");
+            StartCoroutine(Blink());
+        }
+    }
+
+public IEnumerator Blink()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<RaycasterGrabber>().DropObject();
+        gameObject.GetComponent<BoxCollider>().enabled=false;
+        Instantiate(destroyPrefab,transform.position,transform.rotation);
+        render.SetActive(false);
+        rb.isKinematic=true;
+        
+        yield return new WaitForSeconds(5);
+        render.SetActive(true);
+        rb.isKinematic=false;
+        gameObject.GetComponent<BoxCollider>().enabled=true;
     }
 
     public void VolverAlMuebleInstantaneo()

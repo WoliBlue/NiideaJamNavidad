@@ -14,6 +14,10 @@ public class DataManager : MonoBehaviour
 
     void Update()
     {
+            if (figurasVendidas >= 8)
+            {
+                print("Final bueno");
+            }
         if (Input.GetKeyDown(KeyCode.R))
         {
             GameManager.instance.willBuy=true;
@@ -22,14 +26,6 @@ public class DataManager : MonoBehaviour
         if (diaActual == diasTotales)
         {
             print("Dia final");
-            if (figurasVendidas >= 8)
-            {
-                print("Final bueno");
-            }
-            else
-            {
-                print("Final malo");
-            }
         }
     }
     public void IncrementarFigurasVendidas()

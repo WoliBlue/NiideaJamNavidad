@@ -25,6 +25,22 @@ public class RaycasterGrabber : MonoBehaviour
         }
     }
 
+    public void DropObject()
+    {
+            Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+            rb.useGravity = true;
+            rb.linearVelocity = Vector3.zero;
+
+            // Notificar a la figura que ya no está siendo agarrada
+            Figuras figura = grabbedObject.GetComponent<Figuras>();
+            if (figura != null)
+            {
+                figura.SiendoAgarrada(false);
+            }
+
+            grabbedObject = null;
+            return;
+    }
     void Update()
     {
         RaycastHit raycast;
