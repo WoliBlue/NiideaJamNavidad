@@ -14,11 +14,11 @@ public class PlayerController : MonoBehaviour
     public float MoveSpeed = 6f; // Velocidad normal reducida para realismo
     public float SprintSpeed = 10f;
     [Range(0f, 1f)] public float BackwardSpeedMultiplier = 0.6f; // Ir hacia atrás es 40% más lento
-    
+
     [Header("Physics Settings")]
     public float Gravity = -15.0f; // Gravedad un poco más fuerte para que no flote al caer
     public float AccelerationTime = 0.1f; // Cuanto tarda en pillar velocidad (da sensación de peso)
-    
+
     // Referencias internas
     protected CharacterController movementController;
     protected Camera playerCamera;
@@ -30,20 +30,22 @@ public class PlayerController : MonoBehaviour
     private Vector2 _currentVelocityInput; // Para el suavizado (SmoothDamp)
     private Vector2 _smoothInputVelocity; // Referencia para la función SmoothDamp
 
-    protected virtual void Start() {
+    protected virtual void Start()
+    {
         movementController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
 
         // Ocultar y bloquear cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
+
         // Inicializar rotación actual
         yaw = transform.eulerAngles.y;
         pitch = playerCamera.transform.localEulerAngles.x;
     }
 
-    protected virtual void Update() {
+    protected virtual void Update()
+    {
         // Rotación de cámara
         yaw += Input.GetAxisRaw("Mouse X") * LookSensitivity;
         pitch -= Input.GetAxisRaw("Mouse Y") * LookSensitivity;
@@ -71,21 +73,26 @@ public class PlayerController : MonoBehaviour
         Vector3 velocity = transform.right * _currentVelocityInput.x + transform.forward * _currentVelocityInput.y;
 
         // Gravedad 
-        if (movementController.isGrounded) {
-            if (_verticalVelocity < 0.0f) {
+        if (movementController.isGrounded)
+        {
+            if (_verticalVelocity < 0.0f)
+            {
                 _verticalVelocity = -2f;
             }
-        } else {
+        }
+        else
+        {
             // Aplicar gravedad
             _verticalVelocity += Gravity * Time.deltaTime;
         }
         velocity.y = _verticalVelocity;
-		// Moverte
+        // Moverte
         movementController.Move(velocity * Time.deltaTime);
     }
 
     // Funciones de utilidad para los ángulos
-    protected float ClampAngle(float angle, float min, float max) {
+    protected float ClampAngle(float angle, float min, float max)
+    {
         if (angle < -360) angle += 360;
         if (angle > 360) angle -= 360;
         return Mathf.Clamp(angle, min, max);

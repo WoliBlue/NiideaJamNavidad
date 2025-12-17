@@ -14,7 +14,7 @@ public class RaycasterGrabber : MonoBehaviour
     {
         camera = Camera.main;
     }
-[SerializeField] float talkDistance = 2;
+    [SerializeField] float talkDistance = 2;
     bool inConversation;
 
 
@@ -31,7 +31,7 @@ public class RaycasterGrabber : MonoBehaviour
             {
                 //if (hitInfo.collider.gameObject.TryGetComponent(out NPC npc))
                 //{
-                  //  DialogueBoxController.instance.StartDialogue(npc.dialogueAsset.dialogue, npc.StartPosition, npc.npcName);
+                //  DialogueBoxController.instance.StartDialogue(npc.dialogueAsset.dialogue, npc.StartPosition, npc.npcName);
                 //}
             }
         }
@@ -48,23 +48,23 @@ public class RaycasterGrabber : MonoBehaviour
 
     public void DropObject()
     {
-            Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
-            rb.useGravity = true;
-            rb.linearVelocity = Vector3.zero;
+        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+        if (!rb) return;
+        rb.useGravity = true;
+        rb.linearVelocity = Vector3.zero;
 
-            // Notificar a la figura que ya no está siendo agarrada
-            Figuras figura = grabbedObject.GetComponent<Figuras>();
-            if (figura != null)
-            {
-                figura.SiendoAgarrada(false);
-            }
-
-            grabbedObject = null;
-            return;
+        // Notificar a la figura que ya no está siendo agarrada
+        Figuras figura = grabbedObject.GetComponent<Figuras>();
+        if (figura != null)
+        {
+            figura.SiendoAgarrada(false);
+        }
+        grabbedObject = null;
+        return;
     }
     void Update()
     {
-                if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Interact();
         }
