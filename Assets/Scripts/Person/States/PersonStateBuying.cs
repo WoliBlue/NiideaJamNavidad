@@ -1,33 +1,37 @@
 using UnityEngine;
 
 public class PersonStateBuying : IPersonState {
-  #region Variables
-  private bool _isInteracting = false;
-  #endregion
+    
+    private bool _hasStartedDialogue = false;
 
-  #region Public Methods
-  public void Update(Person person) {
-    Debug.Log(person.Name + " está COMPRANDO\n");
+    public void Update(Person person) {
+        // 1. Moverse hacia el mostrador
+        if (!person.CheckReachedTarget()) {
+            person.Movement();
+            return;
+        }
 
-    if (!person.CheckReachedTarget()) {
-      person.Movement();
-      return;
+        // 2. Una vez llega, iniciamos diálogo (solo una vez)
+        if (!_hasStartedDialogue) {
+            StartDialogue(person);
+        }
+        
+        // Aquí no llamamos a FinishBuying. 
+        // Esperamos a que person.EndConversation() decida qué hacer.
     }
 
-    // TODO: Activar posible interacción para que el player pueda dialogar con el y activar el sistema de diálogo
-    // if (!_isInteracting) {
-    //   StartDialogue(person);
-    // }
+    private void StartDialogue(Person person) {
+        _hasStartedDialogue = true;
+        
+        Debug.Log("Iniciando conversación con " + person.Name);
 
-    person.FinishBuying();
-  }
-  #endregion
-
-  #region Private Methods
-  private void StartDialogue(Person person) {
-    _isInteracting = true;
-
-    // DialogueManager.Instance.StartDialogue(person);
-  }
-  #endregion
+        // Llamamos al DialogueBoxControllerMulti pasando el árbol de este personaje
+        if (person.MyDialogue != null) {
+            DialogueBoxControllerMulti.instance.StartDialogue(person.MyDialogue, 0, person);
+        } else {
+            Debug.LogError("¡Este personaje no tiene asignado un DialogueTree en el inspector!");
+            // Failsafe: Si no tiene diálogo, se va para no bloquear el juego
+            person.FinishBuying();
+        }
+    }
 }

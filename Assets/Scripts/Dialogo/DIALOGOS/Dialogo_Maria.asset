@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f54baaecd1159baf8ace0d5b9abad26, type: 3}
+  m_Name: Dialogo_Maria
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTree
+  sections:
+  - dialogue:
+    - 'Me he dado cuenta de que cuando tus figuras se rompen, vuelven a juntarse. '
+    endAfterDialogue: 0
+    branchPoint:
+      question: "\xBFNo hay justificaci\xF3n?"
+      answers:
+      - answerLabel: "No podr\xE9 librarme de ellas hasta venderlas"
+        nextElement: 1
+        scoreImpact: 1
+      - answerLabel: Las hizo un mago
+        nextElement: 1
+        scoreImpact: 0
+      - answerLabel: Sonaba gracioso en mi mente
+        nextElement: 1
+        scoreImpact: -1
+  - dialogue:
+    - "Eso no es una justificaci\xF3n v\xE1lida."
+    endAfterDialogue: 0
+    branchPoint:
+      question: "\xBFVas a seguir con esa ch\xE1chara o vas a vender algo?"
+      answers:
+      - answerLabel: Solo intento ganarme la vida
+        nextElement: 2
+        scoreImpact: 1
+      - answerLabel: Lo que usted diga
+        nextElement: 2
+        scoreImpact: -1
+      - answerLabel: "\xBFQuieres comprar algo?"
+        nextElement: 2
+        scoreImpact: 0
+  - dialogue:
+    - "Mucho dolor de cabeza por tanta ch\xE1chara..."
+    endAfterDialogue: 1
+    branchPoint:
+      question: _decision
+      answers: []

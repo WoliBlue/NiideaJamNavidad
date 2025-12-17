@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f54baaecd1159baf8ace0d5b9abad26, type: 3}
+  m_Name: Dialogo_TutorialFinal
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTree
+  sections:
+  - dialogue:
+    - "\xA1Vaya! Al final has decidido probar una semanita en el puesto de tu padre."
+    endAfterDialogue: 0
+    branchPoint:
+      question: "\xBFSabes cu\xE1l era su secreto para una buena venta?"
+      answers:
+      - answerLabel: "\xBFLa calidad de las figuras?"
+        nextElement: 1
+        scoreImpact: -1
+      - answerLabel: "\xBFEl precio de los art\xEDculos?"
+        nextElement: 1
+        scoreImpact: -1
+      - answerLabel: "\xBFDe qu\xE9 est\xE1s hablando?"
+        nextElement: 1
+        scoreImpact: -1
+  - dialogue:
+    - "No... \xA1La conversaci\xF3n! Me dijo: \"Si tienes don de gente, todo el mundo
+      querr\xE1 comprarte\"."
+    endAfterDialogue: 0
+    branchPoint:
+      question: "Bueno, si alguien quiere comprar algo, lleva la figura hasta el
+        mantel. \xBFF\xE1cil, no?"
+      answers:
+      - answerLabel: "Entiendo, gracias. \xBFHas venido a comprar?"
+        nextElement: 2
+        scoreImpact: -1
+      - answerLabel: "\xBFEs as\xED como vas a ayudarme?"
+        nextElement: 2
+        scoreImpact: -1
+      - answerLabel: Solo quiero que me dejes trabajar
+        nextElement: 2
+        scoreImpact: -1
+  - dialogue:
+    - "\xA1Cuidado con esa actitud! Yo ya tengo todas las figuras que se puedan tener."
+    endAfterDialogue: 0
+    branchPoint:
+      question: "Conversa y vende. Si en 4 d\xEDas lo vendes todo, no tendr\xE1s
+        que renovar el puesto y puedes volver a tu vida"
+      answers:
+      - answerLabel: Gracias por el consejo
+        nextElement: 3
+        scoreImpact: -1
+      - answerLabel: "Ya veremos c\xF3mo se da"
+        nextElement: 3
+        scoreImpact: -1
+      - answerLabel: Pues vaya.
+        nextElement: 3
+        scoreImpact: -1
+  - dialogue:
+    - "Bueno, te dejo. Ah, y no servir\xE1 de nada tirar las figuras o romperlas."
+    endAfterDialogue: 1
+    branchPoint:
+      question: _decision
+      answers: []

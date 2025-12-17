@@ -47,9 +47,14 @@ public class MantelVenta : MonoBehaviour
                 Destroy(other.gameObject);
                 if(GameManager.instance.figuras.Contains(other.gameObject))
                 GameManager.instance.figuras.Remove(other.gameObject);
+
+                Person currentClient = FindFirstObjectByType<PersonManager>().CurrentBuyer;
                 
-                // TODO: Notificar al GameManager/DataManager
-                // GameManager.instance.RegistrarVenta(figuraComponent.miTipo);
+                if (currentClient != null)
+                {
+                    currentClient.FinishBuying();
+                    }
+
             }
             else
             {

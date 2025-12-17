@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f54baaecd1159baf8ace0d5b9abad26, type: 3}
+  m_Name: Dialogo_Enamorados
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTree
+  sections:
+  - dialogue:
+    - "\xA1Buenas tardes! \xA1Qu\xE9 bonito puesto!"
+    endAfterDialogue: 0
+    branchPoint:
+      question: "\xBFVerdad que s\xED?"
+      answers:
+      - answerLabel: "\xA1Y qu\xE9 bonita pareja hac\xE9is!"
+        nextElement: 1
+        scoreImpact: 1
+      - answerLabel: "Anda, ven\xEDs muy pegaditos!"
+        nextElement: 2
+        scoreImpact: 0
+      - answerLabel: No ofrecemos 2x1 eh
+        nextElement: 3
+        scoreImpact: -1
+  - dialogue:
+    - "\xA1Muchas gracias!"
+    endAfterDialogue: 0
+    branchPoint:
+      question: "Es nuestra primera navidad juntos y ten\xEDamos muchas ganas de
+        montar el Bel\xE9n."
+      answers:
+      - answerLabel: Se os ve con ganas de celebrar la navidad
+        nextElement: 4
+        scoreImpact: 1
+      - answerLabel: "\xBFOs hab\xE9is ido a vivir juntos este a\xF1o?"
+        nextElement: 5
+        scoreImpact: 0
+      - answerLabel: "\xBFEst\xE1 bien tu novio?"
+        nextElement: 6
+        scoreImpact: -1
+  - dialogue:
+    - "Nunca es suficiente\u2026"
+    endAfterDialogue: 0
+    branchPoint:
+      question: "Es nuestra primera navidad juntos y ten\xEDamos muchas ganas de
+        montar el Bel\xE9n."
+      answers:
+      - answerLabel: Se os ve con ganas de celebrar la navidad
+        nextElement: 4
+        scoreImpact: 1
+      - answerLabel: "\xBFOs hab\xE9is ido a vivir juntos este a\xF1o?"
+        nextElement: 5
+        scoreImpact: 0
+      - answerLabel: "\xBFEst\xE1 bien tu novio?"
+        nextElement: 6
+        scoreImpact: -1
+  - dialogue:
+    - "Bueno\u2026"
+    endAfterDialogue: 0
+    branchPoint:
+      question: "Es nuestra primera navidad juntos y ten\xEDamos muchas ganas de
+        montar el Bel\xE9n."
+      answers:
+      - answerLabel: Se os ve con ganas de celebrar la navidad
+        nextElement: 4
+        scoreImpact: 1
+      - answerLabel: "\xBFOs hab\xE9is ido a vivir juntos este a\xF1o?"
+        nextElement: 5
+        scoreImpact: 0
+      - answerLabel: "\xBFEst\xE1 bien tu novio?"
+        nextElement: 6
+        scoreImpact: -1
+  - dialogue:
+    - "\xBFQu\xE9? \xBFQuieres que elija yo? CIELITO MIO MUCHAS GRACIAS"
+    endAfterDialogue: 0
+    branchPoint:
+      question: "\xBFQu\xE9 piensas de nosotros?"
+      answers:
+      - answerLabel: Que buenos modales tiene
+        nextElement: 7
+        scoreImpact: 1
+      - answerLabel: Tu novio tiene una voz muy bonita
+        nextElement: 7
+        scoreImpact: 0
+      - answerLabel: Definitivamente no ha dicho nada
+        nextElement: 7
+        scoreImpact: -1
+  - dialogue:
+    - "\xBFNo creer\xE1s que es muy r\xE1pido no?"
+    endAfterDialogue: 0
+    branchPoint:
+      question: "\xBFQu\xE9 piensas de nosotros?"
+      answers:
+      - answerLabel: Que buenos modales tiene
+        nextElement: 7
+        scoreImpact: 1
+      - answerLabel: Tu novio tiene una voz muy bonita
+        nextElement: 7
+        scoreImpact: 0
+      - answerLabel: Definitivamente no ha dicho nada
+        nextElement: 7
+        scoreImpact: -1
+  - dialogue:
+    - Y ESO que te importa a ti
+    endAfterDialogue: 0
+    branchPoint:
+      question: "\xBFQu\xE9 piensas de nosotros?"
+      answers:
+      - answerLabel: Que buenos modales tiene
+        nextElement: 7
+        scoreImpact: 1
+      - answerLabel: Tu novio tiene una voz muy bonita
+        nextElement: 7
+        scoreImpact: 0
+      - answerLabel: Definitivamente no ha dicho nada
+        nextElement: 7
+        scoreImpact: -1
+  - dialogue:
+    - "\xA1S\xED! Por eso le quiero tanto..."
+    endAfterDialogue: 1
+    branchPoint:
+      question: _decision
+      answers: []

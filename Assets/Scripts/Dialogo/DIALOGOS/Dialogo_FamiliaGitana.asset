@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f54baaecd1159baf8ace0d5b9abad26, type: 3}
+  m_Name: Dialogo_FamiliaGitana
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTree
+  sections:
+  - dialogue:
+    - "\xA1Buenas! \xA1Vaya d\xEDa m\xE1s bueno se ha quedado para ver el mercadillo!"
+    endAfterDialogue: 0
+    branchPoint:
+      question: "\xBFA que s\xED?"
+      answers:
+      - answerLabel: "\xA1Totalmente! Da gusto ver a la gente as\xED de alegre"
+        nextElement: 1
+        scoreImpact: 1
+      - answerLabel: Bueno, hace un poco de viento
+        nextElement: 2
+        scoreImpact: 0
+      - answerLabel: No me he fijado, estoy trabajando
+        nextElement: 3
+        scoreImpact: -1
+  - dialogue:
+    - "\xA1Di que s\xED! \xA1Esa es la actitud!"
+    endAfterDialogue: 0
+    branchPoint:
+      question: "Pues mira, ven\xEDamos buscando una figura para el ni\xF1o, que
+        le hace ilusi\xF3n"
+      answers:
+      - answerLabel: "\xA1Qu\xE9 alegr\xEDa! Los ni\xF1os son los que m\xE1s disfrutan"
+        nextElement: 4
+        scoreImpact: 1
+      - answerLabel: "Tenemos de todo, mirad lo que quer\xE1is"
+        nextElement: 5
+        scoreImpact: 0
+      - answerLabel: Que no toque mucho, que se rompen
+        nextElement: 6
+        scoreImpact: -1
+  - dialogue:
+    - "\xA1Uy! \xA1Si esto no es nada!"
+    endAfterDialogue: 0
+    branchPoint:
+      question: "Pues mira, ven\xEDamos buscando una figura para el ni\xF1o, que
+        le hace ilusi\xF3n"
+      answers:
+      - answerLabel: "\xA1Qu\xE9 alegr\xEDa! Los ni\xF1os son los que m\xE1s disfrutan"
+        nextElement: 4
+        scoreImpact: 1
+      - answerLabel: "Tenemos de todo, mirad lo que quer\xE1is"
+        nextElement: 5
+        scoreImpact: 0
+      - answerLabel: Que no toque mucho, que se rompen
+        nextElement: 6
+        scoreImpact: -1
+  - dialogue:
+    - "Vaya malaje est\xE1s hecho..."
+    endAfterDialogue: 0
+    branchPoint:
+      question: "Pues mira, ven\xEDamos buscando una figura para el ni\xF1o, que
+        le hace ilusi\xF3n"
+      answers:
+      - answerLabel: "\xA1Qu\xE9 alegr\xEDa! Los ni\xF1os son los que m\xE1s disfrutan"
+        nextElement: 4
+        scoreImpact: 1
+      - answerLabel: "Tenemos de todo, mirad lo que quer\xE1is"
+        nextElement: 5
+        scoreImpact: 0
+      - answerLabel: Que no toque mucho, que se rompen
+        nextElement: 6
+        scoreImpact: -1
+  - dialogue:
+    - "\xA1Ole! \xA1Qu\xE9 arte tienes hablando!"
+    endAfterDialogue: 1
+    branchPoint:
+      question: _decision
+      answers: []
+  - dialogue:
+    - Pues vamos a echar un ojo...
+    endAfterDialogue: 1
+    branchPoint:
+      question: _decision
+      answers: []
+  - dialogue:
+    - "\xA1No te preocupes, que mi ni\xF1o es muy cuidadoso!"
+    endAfterDialogue: 1
+    branchPoint:
+      question: _decision
+      answers: []

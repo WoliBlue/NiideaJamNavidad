@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f54baaecd1159baf8ace0d5b9abad26, type: 3}
+  m_Name: Dialogo_Rafa
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTree
+  sections:
+  - dialogue:
+    - "Hm... el Post-Processing no est\xE1 mal, pero noto algo raro en los Shaders."
+    endAfterDialogue: 0
+    branchPoint:
+      question: "La cosa es, \xBFVengo a comprar o a debatir?"
+      answers:
+      - answerLabel: "Es que aqu\xED usamos C#, no Blueprints"
+        nextElement: 1
+        scoreImpact: 1
+      - answerLabel: "\xBFQuiz\xE1s es la iluminaci\xF3n de Unity?"
+        nextElement: 1
+        scoreImpact: 0
+      - answerLabel: "\xBFA usted qu\xE9 le pasa con Unity?"
+        nextElement: 1
+        scoreImpact: -1
+  - dialogue:
+    - "\xA1Sab\xEDa que era Unity! Tengo que largarme de aqu\xED."
+    endAfterDialogue: 0
+    branchPoint:
+      question: "\xBFNo crees que esto lucir\xEDa mejor en un motor decente?"
+      answers:
+      - answerLabel: "Seguramente, pero no s\xE9 como funciona."
+        nextElement: 2
+        scoreImpact: 1
+      - answerLabel: "No s\xE9 qu\xE9 es eso, yo solo vendo barro"
+        nextElement: 2
+        scoreImpact: -1
+  - dialogue:
+    - "En fin, al menos est\xE1 acabado el juego."
+    endAfterDialogue: 1
+    branchPoint:
+      question: _decision
+      answers: []

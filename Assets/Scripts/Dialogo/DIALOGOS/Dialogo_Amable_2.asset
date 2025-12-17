@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f54baaecd1159baf8ace0d5b9abad26, type: 3}
+  m_Name: Dialogo_Amable_2
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTree
+  sections:
+  - dialogue:
+    - "\xA1Buenas tardes! \xA1Qu\xE9 fr\xEDo hace ahora!"
+    endAfterDialogue: 0
+    branchPoint:
+      question: "\"\xBFNo te parece?\""
+      answers:
+      - answerLabel: "Ya ves, \xA1Estoy congel\xE1ndome"
+        nextElement: 1
+        scoreImpact: 1
+      - answerLabel: Ay, pues no noto nada ahora
+        nextElement: 2
+        scoreImpact: 0
+      - answerLabel: "Ponte una chaqueta, \xBFno?"
+        nextElement: 3
+        scoreImpact: -1
+  - dialogue:
+    - "Y eso que tu caseta est\xE1 cubierta!"
+    endAfterDialogue: 0
+    branchPoint:
+      question: "He mirado por todas partes y no encuentro la figurita que m\xE1s
+        me llame\u2026"
+      answers:
+      - answerLabel: "\xA1Eso puede cambiar ahora!"
+        nextElement: 4
+        scoreImpact: 1
+      - answerLabel: "Quiz\xE1s no hay inspiraci\xF3n hoy"
+        nextElement: 5
+        scoreImpact: 0
+      - answerLabel: A veces toca tirar la toalla
+        nextElement: 6
+        scoreImpact: -1
+  - dialogue:
+    - Que suerte...
+    endAfterDialogue: 0
+    branchPoint:
+      question: "He mirado por todas partes y no encuentro la figurita que m\xE1s
+        me llame"
+      answers:
+      - answerLabel: Eso puede cambiar ahora!
+        nextElement: 4
+        scoreImpact: 1
+      - answerLabel: "Quiz\xE1s no hay inspiraci\xF3n hoy"
+        nextElement: 5
+        scoreImpact: 0
+      - answerLabel: "A veces toca tirar la toalla\u2026"
+        nextElement: 6
+        scoreImpact: -1
+  - dialogue:
+    - Bueno...
+    endAfterDialogue: 0
+    branchPoint:
+      question: "He mirado por todas partes y no encuentro la figurita que m\xE1s
+        me llame\u2026"
+      answers:
+      - answerLabel: Eso puede cambiar ahora
+        nextElement: 4
+        scoreImpact: 1
+      - answerLabel: "Quiz\xE1s no hay inspiraci\xF3n hoy"
+        nextElement: 5
+        scoreImpact: 0
+      - answerLabel: A veces toca tirar la toalla
+        nextElement: 6
+        scoreImpact: -1
+  - dialogue:
+    - "\xA1Pues s\xED!"
+    endAfterDialogue: 0
+    branchPoint:
+      question: "Quiz\xE1s es el fr\xEDo que no me ayuda a elegir, \xBFQu\xE9 crees?"
+      answers:
+      - answerLabel: "Puede que ya sepas la respuesta\u2026"
+        nextElement: 7
+        scoreImpact: 1
+      - answerLabel: "No lo s\xE9"
+        nextElement: 7
+        scoreImpact: -1
+  - dialogue:
+    - Ya...
+    endAfterDialogue: 0
+    branchPoint:
+      question: "Quiz\xE1s es el fr\xEDo que no me ayuda a elegir, \xBFQu\xE9 crees?"
+      answers:
+      - answerLabel: "Puede que ya sepas la respuesta\u2026"
+        nextElement: 7
+        scoreImpact: 1
+      - answerLabel: "No lo s\xE9"
+        nextElement: 7
+        scoreImpact: -1
+  - dialogue:
+    - Puede...
+    endAfterDialogue: 0
+    branchPoint:
+      question: "Quiz\xE1s es el fr\xEDo que no me ayuda a elegir, \xBFQu\xE9 crees?"
+      answers:
+      - answerLabel: "Puede que ya sepas la respuesta\u2026"
+        nextElement: 7
+        scoreImpact: 1
+      - answerLabel: "No lo s\xE9\u2026"
+        nextElement: 7
+        scoreImpact: -1
+  - dialogue:
+    - _decision
+    endAfterDialogue: 1
+    branchPoint:
+      question: 
+      answers:
+      - answerLabel: "Es mejor que escuches tu coraz\xF3n para saber cu\xE1l\u2026"
+        nextElement: 7
+        scoreImpact: 1
+      - answerLabel: " \xA1Como veas!"
+        nextElement: 8
+        scoreImpact: 0
+      - answerLabel: La que sea
+        nextElement: 9
+        scoreImpact: -1

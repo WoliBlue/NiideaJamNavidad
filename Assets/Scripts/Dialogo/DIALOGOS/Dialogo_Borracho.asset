@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f54baaecd1159baf8ace0d5b9abad26, type: 3}
+  m_Name: Dialogo_Borracho
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTree
+  sections:
+  - dialogue:
+    - "\xA1Hip! Oye... "
+    endAfterDialogue: 0
+    branchPoint:
+      question: "\xBFt\xFA no... no ten\xEDas un puesto de churros el a\xF1o pasado?"
+      answers:
+      - answerLabel: No, caballero, siempre figuras
+        nextElement: 1
+        scoreImpact: 1
+      - answerLabel: "Quiz\xE1s me confunde con mi primo"
+        nextElement: 1
+        scoreImpact: 0
+      - answerLabel: "\xBFHa bebido usted mucho an\xEDs hoy?"
+        nextElement: 1
+        scoreImpact: -1
+  - dialogue:
+    - "Pues el chocolate estaba... \xA1hip!... de muerte."
+    endAfterDialogue: 0
+    branchPoint:
+      question: "\xBFTienes alg\xFAn pastor que se parezca a mi cu\xF1ado? Es as\xED,
+        bajito y con cara de sue\xF1o."
+      answers:
+      - answerLabel: "Todos son muy expresivos, alguno habr\xE1"
+        nextElement: 2
+        scoreImpact: 1
+      - answerLabel: "Son figuras est\xE1ndar, no caricaturas"
+        nextElement: 2
+        scoreImpact: 0
+      - answerLabel: No me haga perder el tiempo
+        nextElement: 2
+        scoreImpact: -1
+  - dialogue:
+    - "Da igual... con esta niebla... \xA1hip!... no veo ni el mantel."
+    endAfterDialogue: 1
+    branchPoint:
+      question: _decision
+      answers: []

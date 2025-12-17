@@ -16,7 +16,7 @@ public string charName;
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            ShowDialogue("HOLA TENGO AHHHHHHHHHHHHHHHHHHH",charName);
+            ShowDialogue("HOLA prueba",charName);
         }
     }
 
