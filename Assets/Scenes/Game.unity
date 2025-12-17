@@ -482,6 +482,9 @@ MonoBehaviour:
   LookSensitivity: 1
   MoveSpeed: 10
   SprintSpeed: 30
+  BackwardSpeedMultiplier: 0.6
+  Gravity: -15
+  AccelerationTime: 0.1
 --- !u!143 &120327873
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2430,6 +2433,22 @@ PrefabInstance:
     - target: {fileID: 5900890719443251601, guid: 4139a00ce5927fb43aaa68c5d8e3fae6, type: 3}
       propertyPath: m_Name
       value: Jake _El Borracho_
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409142537699913067, guid: 4139a00ce5927fb43aaa68c5d8e3fae6, type: 3}
+      propertyPath: m_Size.x
+      value: 20.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409142537699913067, guid: 4139a00ce5927fb43aaa68c5d8e3fae6, type: 3}
+      propertyPath: m_Size.y
+      value: 20.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409142537699913067, guid: 4139a00ce5927fb43aaa68c5d8e3fae6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a25faf1fb68e455468787b85c2f97188, type: 3}
+    - target: {fileID: 8409142537699913067, guid: 4139a00ce5927fb43aaa68c5d8e3fae6, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9100297535012026425, guid: 4139a00ce5927fb43aaa68c5d8e3fae6, type: 3}
       propertyPath: m_LocalScale.x
