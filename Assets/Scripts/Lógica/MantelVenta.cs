@@ -3,10 +3,10 @@ using UnityEngine;
 public class MantelVenta : MonoBehaviour
 {
     public GameObject figura;
-    
+
     [Header("Audio")]
     public AudioClip sonidoVenta;
-    public AudioClip sonidoError; 
+    public AudioClip sonidoError;
     private AudioSource audioSource;
 
     void Start()
@@ -21,53 +21,42 @@ public class MantelVenta : MonoBehaviour
         audioSource.spatialBlend = 1f; // Sonido 3D
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         Figuras figuraComponent = other.GetComponent<Figuras>();
-        
-        if (figuraComponent != null)
+
+        // Solo procesamos si hay una figura y NO está siendo agarrada por el jugador
+        if (figuraComponent != null && !figuraComponent.EstaSiendoAgarrada)
         {
-            // VALIDACIÓN: Solo se puede vender si isCorrect es true
-            if (figuraComponent.isCorrect)
+            // EXCEPCIÓN: Solo se permite en el mantel si ES la figura correcta Y está resaltada
+            if (figuraComponent.EsFiguraObjetivo)
             {
-                // ✓ FIGURA CORRECTA - VENDER
+                // ✓ VENTA EXITOSA
                 Debug.Log("¡Venta exitosa! Figura: " + figuraComponent.miTipo);
-                
-                // Marcar como vendida
+
                 figuraComponent.FueVendida();
                 GameManager.instance.VenderFigura();
-                
-                // Reproducir sonido de venta
+
                 if (sonidoVenta != null)
-                {
                     audioSource.PlayOneShot(sonidoVenta, 0.5f);
-                }
-                
-                // Destruir la figura
+
                 Destroy(other.gameObject);
-                if(GameManager.instance.figuras.Contains(other.gameObject))
-                GameManager.instance.figuras.Remove(other.gameObject);
+                if (GameManager.instance.figuras.Contains(other.gameObject))
+                    GameManager.instance.figuras.Remove(other.gameObject);
 
                 Person currentClient = FindFirstObjectByType<PersonManager>().CurrentBuyer;
-                
-                if (currentClient != null)
-                {
-                    currentClient.FinishBuying();
-                    }
-
+                if (currentClient != null) currentClient.ClientReceivedFigure();
             }
             else
             {
-                // ✗ FIGURA INCORRECTA - RECHAZAR
-                Debug.Log("¡Error! Esta no es la figura correcta. Tipo: " + figuraComponent.miTipo);
-                
-                // Reproducir sonido de error
-                if (sonidoError != null)
-                {
-                    audioSource.PlayOneShot(sonidoError, 0.5f);
-                }
-                
-                // Hacer que vuelva a su posición original
+                // ✗ CUALQUIER OTRO CASO: Devolver al mueble
+                // (Ya sea porque es la figura incorrecta o porque el cliente aún no está listo)
+                Debug.Log("Figura devuelta al mueble: " + figuraComponent.miTipo);
+
+                // Solo sonar el error si había una intención de compra activa
+                if (sonidoError != null && GameManager.instance != null && GameManager.instance.willBuy)
+                    audioSource.PlayOneShot(sonidoError, 0.3f);
+
                 figuraComponent.VolverAlMueble();
             }
         }

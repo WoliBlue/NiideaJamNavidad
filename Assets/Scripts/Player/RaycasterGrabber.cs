@@ -63,54 +63,79 @@ public class RaycasterGrabber : MonoBehaviour
         grabbedObject = null;
         return;
     }
+    private GameObject hoveredObject;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interact();
         }
+
+        // Raycast para detección de objetos (Hover Highlight)
+        Ray ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit raycast;
 
-        // Si ya tenemos un objeto y hacemos click, lo soltamos
-        if (grabbedObject && Input.GetKeyDown(KeyCode.Mouse0))
+        if (Physics.Raycast(ray, out raycast, grabDistance))
         {
-            Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
-            rb.useGravity = true;
-            rb.linearVelocity = Vector3.zero;
-
-            // Notificar a la figura que ya no está siendo agarrada
-            Figuras figura = grabbedObject.GetComponent<Figuras>();
-            if (figura != null)
+            GameObject hitObj = raycast.collider.gameObject;
+            if (hitObj.CompareTag("objeto"))
             {
-                figura.SiendoAgarrada(false);
-            }
-
-            grabbedObject = null;
-            return;
-        }
-
-        // Raycast para agarrar objetos
-        Ray ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            if (Physics.Raycast(ray, out raycast))
-            {
-                if (raycast.collider.gameObject.tag == "objeto")
+                if (hoveredObject != hitObj)
                 {
-                    grabbedObject = raycast.transform.gameObject;
-
-                    // Notificar a la figura que está siendo agarrada
-                    Figuras figura = grabbedObject.GetComponent<Figuras>();
-                    if (figura != null)
-                    {
-                        figura.SiendoAgarrada(true);
-                    }
+                    ClearHover();
+                    hoveredObject = hitObj;
+                    Figuras f = hoveredObject.GetComponent<Figuras>();
+                    if (f != null) f.ToggleSelectionHighlight(true);
                 }
             }
-            Debug.DrawRay(ray.origin, ray.direction * 10, Color.white);
+            else
+            {
+                ClearHover();
+            }
+        }
+        else
+        {
+            ClearHover();
         }
 
-        GrabObject();
+        // AGARRAR / SOLTAR
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (grabbedObject)
+            {
+                DropObject();
+            }
+            else if (hoveredObject != null)
+            {
+                grabbedObject = hoveredObject;
+                ClearHover(); // Dejar de resaltar como 'hover' porque ahora está agarrado
+
+                // Notificar a la figura que está siendo agarrada
+                Figuras figura = grabbedObject.GetComponent<Figuras>();
+                if (figura != null)
+                {
+                    figura.SiendoAgarrada(true);
+                    figura.ToggleSelectionHighlight(false); // Quitar highlight de selección al agarrar
+                }
+            }
+        }
+
+        if (grabbedObject)
+        {
+            GrabObject();
+        }
+
+        Debug.DrawRay(ray.origin, ray.direction * grabDistance, Color.white);
+    }
+
+    private void ClearHover()
+    {
+        if (hoveredObject != null)
+        {
+            Figuras f = hoveredObject.GetComponent<Figuras>();
+            if (f != null) f.ToggleSelectionHighlight(false);
+            hoveredObject = null;
+        }
     }
 }
