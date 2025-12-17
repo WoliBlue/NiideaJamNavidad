@@ -175,7 +175,7 @@ public class Figuras : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
 
-        if (rb.linearVelocity.y > 0.01 && rb.linearVelocity.x > 0.01)
+       if (collision.relativeVelocity.magnitude >= 0.2)
         {
             print("ouch");
             StartCoroutine(Blink());
