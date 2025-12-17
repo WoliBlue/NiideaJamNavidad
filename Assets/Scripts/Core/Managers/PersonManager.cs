@@ -1,20 +1,30 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Unity.Mathematics;
 
 using UnityEngine;
 
 public class PersonManager : MonoBehaviour {
+  private const int DAYS = 4;
+
   #region Variables
-  [Header("Person Prefabs per Level")]
-  [SerializeField] private List<GameObject> _levelPersonPrefabs;
+  [Header("Person Prefabs Lists")]
+  [SerializeField]
+  private GameObjectList[] _levelPersonPrefabsPerDay
+                                             = new GameObjectList[DAYS];
+
+  [Header("Reference Points")]
+  [SerializeField] private Transform _shopPoint;
+  [SerializeField] private Transform _leavingPoint;
 
   [Header("Spawn Settings")]
-  [SerializeField] private Vector3 _spawnStartPosition = Vector3.zero;
+  [SerializeField] private Transform _spawnStart;
   [SerializeField] private Vector3 _offsetPerPerson = new Vector3(0f, 10f, 0f);
 
   [Header("Waiting Queue")]
-  private Queue<Person> _waitingQueue;
+  private Queue<Person> _waitingQueue = new();
 
   [Header("Shop")]
   private Person _currentBuyer;
@@ -22,26 +32,49 @@ public class PersonManager : MonoBehaviour {
 
   #region Events
   void Start() {
+    LoadWaitingQueue(1);
   }
   void Update() {
+    if (!CheckAnyPerson()) return;
 
+    if (!_currentBuyer) {
+      AdvanceQueue();
+    }
   }
   #endregion
 
   #region Public Methods
   public void AddPersonToWaitingQueue(Person person) {
+    if (_waitingQueue == null) return;
+
     if (_waitingQueue.Contains(person)) {
       Debug.LogWarning(person + " ya está en la cola");
+      Destroy(person.gameObject);
       return;
     }
 
     _waitingQueue.Enqueue(person);
+    person.ChangeState(new PersonStateWaiting());
+    person.OnFinishedBuying = HandlePersonFinishedBuying;
+    person.OnFinishedLeaving = HandlePersonFinishedLeaving;
   }
   public void AdvanceQueue() {
     if (_currentBuyer || _waitingQueue.Count <= 0) return;
 
     _currentBuyer = _waitingQueue.Dequeue();
-    _currentBuyer.ChangeState(new PersonStateWaiting());
+
+    // Buyer go to the shop
+    _currentBuyer.SetTargetPosition(_shopPoint.position);
+    _currentBuyer.ChangeState(new PersonStateBuying());
+
+    // People of the waiting queue, go to the next position
+    var arrayTemporal = _waitingQueue.ToArray();
+    for (int i = 0; i < arrayTemporal.Length; i++) {
+      Person person = arrayTemporal[i];
+      person.SetTargetPosition(
+        _spawnStart.position + _offsetPerPerson * arrayTemporal.Length
+      );
+    }
   }
   public void HandlePersonFinishedBuying(Person person) {
     if (person != _currentBuyer) {
@@ -49,37 +82,76 @@ public class PersonManager : MonoBehaviour {
       return;
     }
 
-    _currentBuyer = null; // Free buyer
+    person.SetTargetPosition(_leavingPoint.position);
+    person.ChangeState(new PersonStateLeaving());
+  }
+  public void HandlePersonFinishedLeaving(Person person) {
+    if (person != _currentBuyer) return;
+
+    _currentBuyer = null;
     person.DestroySelf();
     AdvanceQueue();
+  }
+  public bool CheckPeopleWaiting() {
+    if (_waitingQueue == null) return false;
+
+    return _waitingQueue.Count > 0;
+  }
+  public bool CheckAnyPerson() {
+    return CheckPeopleWaiting() || _currentBuyer != null;
   }
   #region Getters
   public Queue<Person> WaitingQueue => _waitingQueue;
   public Person CurrentBuyer => _currentBuyer;
-  public List<GameObject> LevelPersonPrefabs => _levelPersonPrefabs;
+  public GameObjectList[] LevelPersonPrefabsPerDay => _levelPersonPrefabsPerDay;
   public Vector3 OffsetPerPerson => _offsetPerPerson;
-  public Vector3 SpawnStartPosition => _spawnStartPosition;
+  public Transform SpawnStart => _spawnStart;
+  public Transform ShopPoint => _shopPoint;
+  public Transform LeavingPoint => _leavingPoint;
   #endregion
   #endregion
 
   #region Private Methods
-  private void LoadWaitingQueue() {
-    if (_levelPersonPrefabs.Count <= 0) return;
+  private void LoadWaitingQueue(int day) {
+    if (day <= 0 || day > DAYS) {
+      Debug.LogError(
+        "Person manager intenta cargar personas de un día inexistente!\n"
+      );
+    }
 
-    foreach (GameObject personPrefab in _levelPersonPrefabs) {
+    var listItems = _levelPersonPrefabsPerDay[day - 1].items;
+    if (listItems.Count <= 0) return;
+
+    for (int i = 0; i < listItems.Count; i++) {
+      GameObject personPrefab = listItems.ElementAt(i);
       // Intanciate the object in the correct spawn position
       Vector3 spawnPos =
-        _spawnStartPosition + _offsetPerPerson * _waitingQueue.Count;
+      _spawnStart.position + _offsetPerPerson * i;
       GameObject personGO =
         Instantiate(personPrefab, spawnPos, Quaternion.identity);
 
-      // Get Person Monovehabiour and insert to the WaitingQueue
-      Person person = personPrefab.GetComponent<Person>();
+      // Get Person Monovehabiour
+      Person person = personGO.GetComponent<Person>();
       if (!person) {
         Debug.LogError("Person Prefab no tiene Person Monobehaviour");
         Destroy(personPrefab);
       }
-      AddPersonToWaitingQueue(personPrefab.GetComponent<Person>());
+
+      // Insert target position
+      person.SetTargetPosition(spawnPos);
+
+      AddPersonToWaitingQueue(person);
+    }
+  }
+  private void OnValidate() {
+    if (_levelPersonPrefabsPerDay == null ||
+        _levelPersonPrefabsPerDay.Length != DAYS) {
+      _levelPersonPrefabsPerDay = new GameObjectList[DAYS];
+    }
+
+    for (int i = 0; i < _levelPersonPrefabsPerDay.Length; i++) {
+      if (_levelPersonPrefabsPerDay[i] == null)
+        _levelPersonPrefabsPerDay[i] = new GameObjectList();
     }
   }
   #endregion
