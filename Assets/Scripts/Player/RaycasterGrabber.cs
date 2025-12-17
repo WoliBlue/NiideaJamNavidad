@@ -21,13 +21,14 @@ public class RaycasterGrabber : MonoBehaviour
 
     void Interact()
     {
+        Ray ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         if (inConversation)
         {
-            DialogueBoxController.instance.SkipLine();
+            //DialogueBoxControllerMulti.instance.StartDialogue(Person.dialogueAsset.dialogue, npc.StartPosition, npc.npcName);
         }
         else
         {
-            if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitInfo, talkDistance))
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, talkDistance))
             {
                 //if (hitInfo.collider.gameObject.TryGetComponent(out NPC npc))
                 //{

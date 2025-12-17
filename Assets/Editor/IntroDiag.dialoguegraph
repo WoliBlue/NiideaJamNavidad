@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790b4d75d92f4b0984310a268dbd952f, type: 3}
+  m_Name: IntroDiag
+  m_EditorClassIdentifier: Unity.GraphToolkit.Editor::Unity.GraphToolkit.Editor.Implementation.GraphObjectImp
+  m_GraphModel:
+    rid: 6905283069101998331
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6905283069101998331
+      type: {class: GraphModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: Unity.GraphToolkit.Editor}
+      data:
+        m_Guid:
+          m_Value0: 12298372217135920269
+          m_Value1: 13374686104558011349
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: 8d74eb355f98acaad5838864266e9cb9
+        m_Name: 
+        m_GraphNodeModels: []
+        m_GraphWireModels: []
+        m_GraphStickyNoteModels:
+        - rid: 6905283069650141187
+        m_GraphPlacematModels:
+        - rid: 6905283069650141186
+        m_GraphVariableModels:
+        - rid: 6905283069650141184
+        m_GraphPortalModels: []
+        m_SectionModels:
+        - rid: 6905283069101998332
+        m_LocalSubgraphs: []
+        m_LastKnownBounds:
+          serializedVersion: 2
+          x: -39465
+          y: -752
+          width: 600
+          height: 490
+        m_GraphElementMetaData:
+        - m_Guid:
+            m_Value0: 4546409493654998866
+            m_Value1: 14730054337819512939
+          m_HashGuid:
+            serializedVersion: 2
+            Hash: 520fc5b85817183f6b10ef8760aa6bcc
+          m_Category: 1
+          m_Index: 0
+        m_EntryPoint:
+          rid: -2
+        m_Graph:
+          rid: 6905283069101998333
+    - rid: 6905283069101998332
+      type: {class: SectionModel, ns: Unity.GraphToolkit.Editor, asm: Unity.GraphToolkit.Internal.Editor}
+      data:
+        m_Guid:
+          m_Value0: 17133173160427519413
+          m_Value1: 6432327962216617836
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: b5fd89c63642c5ed6cd7bba233384459
+        m_Version: 2
+        m_Items:
+        - rid: 6905283069650141184
+        m_Title: 
+    - rid: 6905283069101998333
+      type: {class: DialogueGraph, ns: , asm: Assembly-CSharp-Editor}
+      data: 
+    - rid: 6905283069650141184
+      type: {class: VariableDeclarationModel, ns: Unity.GraphToolkit.Editor, asm: Unity.GraphToolkit.Internal.Editor}
+      data:
+        m_Guid:
+          m_Value0: 4546409493654998866
+          m_Value1: 14730054337819512939
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: 520fc5b85817183f6b10ef8760aa6bcc
+        m_Version: 2
+        m_Name: New Variable
+        m_UniqueId: 
+        m_DataType:
+          m_Identification: System.String, System.Private.CoreLib, Version=4.0.0.0,
+            Culture=neutral, PublicKeyToken=b77a5c561934e089
+        m_IsExposed: 0
+        m_Scope: 0
+        m_ShowOnInspectorOnly: 0
+        m_Tooltip: 
+        m_InitializationValue:
+          rid: 6905283069650141185
+        m_Modifiers: 0
+        m_VariableFlags: 0
+    - rid: 6905283069650141185
+      type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: Unity.GraphToolkit.Internal.Editor}
+      data:
+        m_Value: 
+    - rid: 6905283069650141186
+      type: {class: PlacematModel, ns: Unity.GraphToolkit.Editor, asm: Unity.GraphToolkit.Internal.Editor}
+      data:
+        m_Guid:
+          m_Value0: 4440410959572222026
+          m_Value1: 8179961692927113304
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: 4ac00dce3d829f3d58383907d20f8571
+        m_Version: 2
+        m_Title: Placemat
+        m_TitleFontSize: 18
+        m_TitleAlignment: 0
+        m_Position:
+          serializedVersion: 2
+          x: -39465.445
+          y: -562.07385
+          width: 600
+          height: 300
+        m_Comment: 
+        m_ElementColor:
+          m_Color: {r: 0.20784314, g: 0.22745098, b: 0.2784314, a: 1}
+          m_HasUserColor: 0
+    - rid: 6905283069650141187
+      type: {class: StickyNoteModel, ns: Unity.GraphToolkit.Editor, asm: Unity.GraphToolkit.Internal.Editor}
+      data:
+        m_Guid:
+          m_Value0: 13830789229991219227
+          m_Value1: 9115840161546389740
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: 1bd0eca886d5f0bfec48364254f8817e
+        m_Version: 2
+        m_Title: werwer
+        m_Contents: ssdfsdf
+        m_ThemeName: Classic
+        m_TextSizeName: Small
+        m_Position:
+          serializedVersion: 2
+          x: -39436.656
+          y: -751.66534
+          width: 200
+          height: 160
