@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 710250188384936250}
   - component: {fileID: 7656076258414440786}
   m_Layer: 0
-  m_Name: Jake _El Borracho_
+  m_Name: Abuela
   m_TagString: persona
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a25faf1fb68e455468787b85c2f97188, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d76a7cdfb02d0f84c96ee00dd47d7fa9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da97f5cb02aad534f897ef1fb15ac474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Jake "El Borracho"
+  _name: Abuela
   _personality: {fileID: 7656076258414440786}
   _figureWants: X
 --- !u!114 &7656076258414440786
