@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class PersonManager : MonoBehaviour
 {
-    private const int DAYS = 4;
+    public const int DAYS = 3;
 
     #region Variables
     [Header("Person Prefabs Lists")]
@@ -29,11 +29,14 @@ public class PersonManager : MonoBehaviour
 
     [Header("Shop")]
     private Person _currentBuyer;
+
+    public static PersonManager instance;
     #endregion
 
     #region Events
     void Start()
     {
+        instance=this;
         LoadWaitingQueue(1);
     }
     void Update()
@@ -131,7 +134,7 @@ public class PersonManager : MonoBehaviour
     #endregion
 
     #region Private Methods
-    private void LoadWaitingQueue(int day)
+    public void LoadWaitingQueue(int day)
     {
         if (day <= 0 || day > DAYS)
         {

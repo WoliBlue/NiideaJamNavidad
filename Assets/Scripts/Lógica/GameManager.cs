@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour {
 
   public int tiempoParaSalir = 4;
   private float timer;
+  public int currentDay;
 
   public Transform puntoDeSalida;
 
@@ -36,6 +37,8 @@ public class GameManager : MonoBehaviour {
   public bool TriggerNewDay;
 
   public float fadeTimer;
+
+  public TextMeshProUGUI endgamePanel;
   // Toda la lógica del juego se controla desde aquí. Pilla que dia es del DataManager para saber que personas llamar
   // y que figuras poner en el mueble. 
   // También control (si es el ultimo dia) de si se ha conseguido el final bueno o malo.
@@ -74,15 +77,16 @@ public class GameManager : MonoBehaviour {
       fadeBlack.color = color;
       if (fadeTimer >= fadeScreenDuration) {
         TriggerNewDay = false;
+        currentDay++;
+        PersonManager.instance.LoadWaitingQueue(currentDay);
         fadeTimer = 0;
       }
     }
     DiaLogic();
-    if (Input.GetKey(KeyCode.T)) {
-      TriggerNewDay = true;
-      triggeringGameover = true;
+    if (Input.GetKeyDown(KeyCode.T)) {
+      CompraFallada();
     }
-    if (Input.GetKey(KeyCode.F)) {
+    if (Input.GetKeyDown(KeyCode.F)) {
       TriggerNewDay = true;
     }
   }
@@ -90,8 +94,10 @@ public class GameManager : MonoBehaviour {
     if (!hasActiveFigures && willBuy || activeFigure == null) {
       if (figuras.Count == 0) {
         print("Ganastes");
+        endgamePanel.gameObject.SetActive(true);// cambiar a la escena.
         return;
       }
+
       activeFigure = figuras[Random.Range(0, figuras.Count)];
 
       activeFigure.GetComponent<Figuras>().isCorrect = true;
@@ -112,6 +118,12 @@ public class GameManager : MonoBehaviour {
 
   }
 
+public void CompraFallada()
+  {
+            Person currentClient = FindFirstObjectByType<PersonManager>().CurrentBuyer;
+            if (currentClient != null) currentClient.ClientReceivedFigure();
+            clientesTotalesDelDia++;
+  }
   public void ChangeClient() {
 
   }

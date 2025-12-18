@@ -23,10 +23,18 @@ public class DataManager : MonoBehaviour
             GameManager.instance.willBuy=true;
         }
         
-        if (diaActual == diasTotales)
+        if (diaActual == diasTotales && figurasVendidas<=5)
         {
+                    print("Perdistes");
+                     // cambiar a la escena.
+                     GameManager.instance.endgamePanel.gameObject.SetActive(true);
+                    GameManager.instance.endgamePanel.text="LOL NOOB";
             print("Dia final");
 
+        }
+         if (diaActual == diasTotales && figurasVendidas>=5)
+        {
+            GameManager.instance.endgamePanel.gameObject.SetActive(true);
         }
     }
     public void IncrementarFigurasVendidas()
