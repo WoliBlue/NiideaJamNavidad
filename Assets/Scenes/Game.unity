@@ -620,6 +620,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 44710698}
     - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
+      propertyPath: TiempoLimite
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
       propertyPath: destroyPrefab
       value: 
       objectReference: {fileID: 7559729631344523925, guid: 950ce5f2ea2837b4ab71740c63eb365e, type: 3}
@@ -1221,6 +1225,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1092478950}
     - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
+      propertyPath: TiempoLimite
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
       propertyPath: destroyPrefab
       value: 
       objectReference: {fileID: 5798569238124920355, guid: 64a892eee4effcd40b450b5cac5468f0, type: 3}
@@ -1459,6 +1467,10 @@ PrefabInstance:
       propertyPath: render
       value: 
       objectReference: {fileID: 1786415506}
+    - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
+      propertyPath: TiempoLimite
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
       propertyPath: destroyPrefab
       value: 
@@ -3520,6 +3532,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2017510015}
     - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
+      propertyPath: TiempoLimite
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
       propertyPath: destroyPrefab
       value: 
       objectReference: {fileID: 1197774774285269960, guid: 62541c1cce820facb91d630c8d3b9c1a, type: 3}
@@ -4422,6 +4438,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1511670379}
     - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
+      propertyPath: TiempoLimite
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
       propertyPath: destroyPrefab
       value: 
       objectReference: {fileID: 2821627505670179291, guid: 1e6b3c613f58b134ab467486a3f40ee6, type: 3}
@@ -5122,6 +5142,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 81504463}
     - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
+      propertyPath: TiempoLimite
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
       propertyPath: destroyPrefab
       value: 
       objectReference: {fileID: 8145882459144454869, guid: 0eacc10b642cd98818155562b35d59cb, type: 3}
@@ -5379,6 +5403,10 @@ PrefabInstance:
       propertyPath: render
       value: 
       objectReference: {fileID: 1555890993}
+    - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
+      propertyPath: TiempoLimite
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
       propertyPath: destroyPrefab
       value: 
@@ -19738,7 +19766,7 @@ PrefabInstance:
       objectReference: {fileID: 1830263009}
     - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
       propertyPath: TiempoLimite
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2590814431433424041, guid: af93169928380c543b7f574526b82d1b, type: 3}
       propertyPath: destroyPrefab
