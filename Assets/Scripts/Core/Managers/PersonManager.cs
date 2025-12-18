@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity;
 
 using Unity.Mathematics;
 
@@ -146,9 +147,11 @@ public class PersonManager : MonoBehaviour
         var listItems = _levelPersonPrefabsPerDay[day - 1].items;
         if (listItems.Count <= 0) return;
 
-        for (int i = 0; i < listItems.Count; i++)
+        for (int i = 0; i < 4; i++)
         {
-            GameObject personPrefab = listItems.ElementAt(i);
+            int a = UnityEngine.Random.Range(0,listItems.Count);
+            GameObject personPrefab = listItems.ElementAt(a);
+            listItems.RemoveAt(a);
             // Intanciate the object in the correct spawn position
             Vector3 spawnPos =
             _spawnStart.position + _offsetPerPerson * i;
