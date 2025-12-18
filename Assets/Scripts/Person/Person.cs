@@ -84,6 +84,18 @@ public class Person : MonoBehaviour
         _state = newState;
     }
 
+    public void ArrivedAtCounter() 
+    {
+        if (this.MyDialogue != null)
+        {
+            DialogueBoxControllerMulti.instance.StartDialogue(this.MyDialogue, 0, this);
+        }
+        else
+        {
+            Debug.LogError("¡OJO! Esta persona (" + _name + ") no tiene asignado un DialogueTree en el Inspector.");
+        }
+    }
+
     // Estos métodos ya no los necesitas llamar manualmente desde los botones, 
     // lo hace el DialogueController automáticamente con los puntos del ScriptableObject
     public void RecieveGoodResponse()
