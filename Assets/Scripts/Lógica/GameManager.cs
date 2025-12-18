@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour {
     hasActiveFigures = false;
     activeFigure = null;
     willBuy = false;
-    clientesTotalesDelDia++;
+    //clientesTotalesDelDia++;
     DataManager.instance.IncrementarFigurasVendidas();
 
   }

@@ -147,7 +147,7 @@ public class PersonManager : MonoBehaviour
         var listItems = _levelPersonPrefabsPerDay[day - 1].items;
         if (listItems.Count <= 0) return;
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             int a = UnityEngine.Random.Range(0,listItems.Count);
             GameObject personPrefab = listItems.ElementAt(a);

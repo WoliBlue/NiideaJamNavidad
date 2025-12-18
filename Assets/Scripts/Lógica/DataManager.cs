@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class DataManager : MonoBehaviour
 {
@@ -16,11 +18,11 @@ public class DataManager : MonoBehaviour
     {
             if (figurasVendidas >= 8)
             {
-                print("Final bueno");
+                SceneManager.LoadScene("PeriodicoFinalBueno");
             }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            GameManager.instance.willBuy=true;
+            //GameManager.instance.willBuy=true;
         }
         
         if (diaActual == diasTotales && figurasVendidas<=5)
@@ -29,12 +31,14 @@ public class DataManager : MonoBehaviour
                      // cambiar a la escena.
                      GameManager.instance.endgamePanel.gameObject.SetActive(true);
                     GameManager.instance.endgamePanel.text="LOL NOOB";
+                    SceneManager.LoadScene("PeriodicoFinalMalo");
             print("Dia final");
 
         }
          if (diaActual == diasTotales && figurasVendidas>=5)
         {
             GameManager.instance.endgamePanel.gameObject.SetActive(true);
+            SceneManager.LoadScene("PeriodicoFinalBueno");
         }
     }
     public void IncrementarFigurasVendidas()

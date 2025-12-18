@@ -68,6 +68,7 @@ public class Person : MonoBehaviour
             Debug.Log(_name + ": Vaya trato... Me voy.");
             // Si le caemos mal, terminamos la compra inmediatamente (sin vender nada) y se va.
             FinishBuying();
+            GameManager.instance.clientesTotalesDelDia++;
         }
     }
 
@@ -76,6 +77,8 @@ public class Person : MonoBehaviour
     {
         Debug.Log(_name + ": ¡Gracias por la figura!");
         FinishBuying(); // Ahora sí, activamos la secuencia de irse
+        //DataManager.instance.figurasVendidas++;
+        GameManager.instance.clientesTotalesDelDia++;
     }
     // ------------------------------------------------
 
