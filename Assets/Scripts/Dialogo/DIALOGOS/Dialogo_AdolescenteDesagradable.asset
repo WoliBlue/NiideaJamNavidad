@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTree
   sections:
   - dialogue:
-    - "T\xEDo, \xBFEs aqu\xED?"
+    - "T\xEDo, esto..."
     endAfterDialogue: 0
     branchPoint:
-      question: "\xBFQu\xE9 respondes?"
+      question: "\xBFEs aqu\xED?"
       answers:
       - answerLabel: "Depende, \xBFPara comprar figuritas navide\xF1as?"
         nextElement: 1
