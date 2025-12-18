@@ -33,6 +33,7 @@ public class MantelVenta : MonoBehaviour
             {
                 // ✓ VENTA EXITOSA
                 Debug.Log("¡Venta exitosa! Figura: " + figuraComponent.miTipo);
+                DataManager.instance.figurasVendidas++;
 
                 figuraComponent.FueVendida();
                 GameManager.instance.VenderFigura();
